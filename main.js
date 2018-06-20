@@ -1,19 +1,13 @@
-class Dog {
-    constructor(name){
-        this.name = name;
-    }
-
-    wheelTheTail() {
-        console.log('Wheeling the tail');
-    }
+const someObj = {
+    usefulMehod: () => console.log('usefulMehod'),
+    doCount: () => console.log('one')
 }
 
-class TeachBarkDecorator {
-    constructor(dog) {
-        return Object.create(dog);
-    }
+function proxyForDoCount(obj) {
+    const doCount = obj.doCount;
 
-    bark() {
-        console.log(`The dog ${this.name} is barking`);
+    obj.doCount = function() {
+        console.log('Here we go');
+        doCount.apply(obj);
     }
 }
