@@ -1,13 +1,27 @@
-const someObj = {
-    usefulMehod: () => console.log('usefulMehod'),
-    doCount: () => console.log('one')
+function pipeline(target, funcArr) {
+   return funcArr.reduce((prev, cur) => {
+        return cur(prev);
+    }, target);
 }
 
-function proxyForDoCount(obj) {
-    const doCount = obj.doCount;
-
-    obj.doCount = function() {
-        console.log('Here we go');
-        doCount.apply(obj);
-    }
+function one(target) {
+    return target + ' Stage one';
 }
+
+function two(target) {
+    return target + ' Stage two';
+}
+
+function three(target) {
+    return target + ' Stage three';
+}
+
+
+pipeline('//target string//', [
+    one,
+    two,
+    three
+])
+
+
+
