@@ -1,27 +1,18 @@
-function pipeline(target, funcArr) {
-   return funcArr.reduce((prev, cur) => {
-        return cur(prev);
-    }, target);
+class Node {
+    constructor(name) {
+        this.name = name;
+        this.children = [];
+    }
+
+    add(child) {
+        this.children.push(child);
+    }
+
+    remove(child) {
+        for (let i = 0; i < this.children.length; i++) {
+            if (this.children[i] === child) {
+                return this.children.splice(i, 1);
+            }
+        }
+    }
 }
-
-function one(target) {
-    return target + ' Stage one';
-}
-
-function two(target) {
-    return target + ' Stage two';
-}
-
-function three(target) {
-    return target + ' Stage three';
-}
-
-
-pipeline('//target string//', [
-    one,
-    two,
-    three
-])
-
-
-
